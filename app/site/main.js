@@ -42,7 +42,10 @@ require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, ali
         
         require(['site/article/index.js', 'dust', 'jquery'], function(page, dust, $) {
 			
-			page.data.id = id;
+			// allow the module to override the article ID, if it wants to
+			if (typeof(page.data.id) === 'undefined') {
+				page.data.id = id;
+			}
 			
 			dust.render(page.template, page.data, function(error, html) {
 				$('#page-content').html(html);
@@ -92,11 +95,12 @@ require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, ali
     // Start Backbone history a necessary step for bookmarkable URL's
     Backbone.history.start();
     
-    console.log('Hello from Backbone!');
 });
 
 require.onError = function (err) {
 	'use strict';
+	
+	// working to make the error fire more than once, and always load a 404
 	console.log(err);
     $('#page-content').html('404 - This page does not yet exist!');
 };
