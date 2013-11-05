@@ -30,12 +30,7 @@ require.config({
     }
 });
 
-require([
-    'backbone',
-    'config',
-    'alias',
-    'dust'
-], function (Backbone, config, alias, dust) {
+require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, alias, dust) {
 	'use strict';
 	
 	var AppRouter = Backbone.Router.extend({
@@ -44,8 +39,17 @@ require([
 	    app_router = new AppRouter();
     
     app_router.on('route:articleID', function (id) {
-        // Note the variable in the route definition being passed in here
-        alert( "Get post number " + id );   
+        
+        require(['site/article/index.js', 'dust', 'jquery'], function(page, dust, $) {
+			
+			page.data.id = id;
+			
+			dust.render(page.template, page.data, function(error, html) {
+				$('#page-content').html(html);
+			});
+			
+		});
+		 
     });
     
     app_router.on('route:defaultRoute', function (actions) {
@@ -66,6 +70,8 @@ require([
 					$('#page-content').html(html);
 				});
 				
+				$(document).trigger('writeComplete');
+				
 			});
 			
 		} else {
@@ -75,6 +81,8 @@ require([
 				dust.render(page.template, page.data, function(error, html) {
 					$('#page-content').html(html);
 				});
+				
+				$(document).trigger('writeComplete');
 				
 			});
 			
