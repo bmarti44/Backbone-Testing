@@ -337,14 +337,21 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
+						cwd: 'app/site',
 						src: ["**/*.dust"],
-						dest: "app/site/dust/",
+						dest: "app/site/template/",
 						ext: ".js"
 					}
 				],
 				options: {
 					relative: true,
-					basePath: 'app/sites'
+					runtime: false,
+					basePath: 'app/site',
+					wrapperOptions: {
+						deps: {
+							dust: "dust"
+						}
+					}
 				}
 			}
 		}

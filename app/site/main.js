@@ -24,15 +24,18 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         bootstrap: 'vendor/bootstrap',
         config: 'config/main',
-        alias: 'module/alias/alias'
+        alias: 'module/alias/alias',
+        dust: '../bower_components/dustjs-linkedin-amd/dust-core-1.2.2',
+        'dust-helpers': '../bower_components/dustjs-helpers-amd/dust-helpers'
     }
 });
 
 require([
     'backbone',
     'config',
-    'alias'
-], function (Backbone, config, alias) {
+    'alias',
+    'dust'
+], function (Backbone, config, alias, dust) {
 	'use strict';
 	
 	var AppRouter = Backbone.Router.extend({
