@@ -27,6 +27,7 @@ app/bower_components
 !.git*
 !.editorconfig
 !.jshintrc
+!.bowerrc
 !.npmignore
 !.travis.yml
 *~
