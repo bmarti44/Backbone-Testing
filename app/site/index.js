@@ -4,6 +4,9 @@
 define(['jquery', 'dust', 'template/index'], function($, dust, template) {
 	'use strict';
 	
-	//return an object to define the "my/shirt" module.
-	return 'my new module';
+	return {
+		'template': template,
+		'data': {}
+	};
+	
 });

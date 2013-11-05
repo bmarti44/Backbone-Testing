@@ -49,7 +49,7 @@ require([
     });
     
     app_router.on('route:defaultRoute', function (actions) {
-		console.log(actions);
+		
 		if (!actions) {
 			actions = 'index.html';
 		}
@@ -59,15 +59,25 @@ require([
 		}
 		
 		if (actions.indexOf('.html') === -1 && actions.indexOf('.htm') === -1) {
-			require(['site/' + actions.replace('!', '') + '/index.js'], function(page) {
-				console.log(actions); 
-				$('#page-content').html(page);
+			
+			require(['site/' + actions.replace('!', '') + '/index.js', 'dust', 'jquery'], function(page, dust, $) {
+				
+				dust.render(page.template, page.data, function(error, html) {
+					$('#page-content').html(html);
+				});
+				
 			});
+			
 		} else {
-			require([actions.replace('.html', '').replace('!', '').replace('.htm', '')], function(page) {
-				console.log(actions); 
-				$('#page-content').html(page);
-			});	
+			
+			require([actions.replace('.html', '').replace('!', '').replace('.htm', ''), 'dust', 'jquery'], function(page, dust, $) {
+				
+				dust.render(page.template, page.data, function(error, html) {
+					$('#page-content').html(html);
+				});
+				
+			});
+			
 		}
         
     });
@@ -79,6 +89,6 @@ require([
 
 require.onError = function (err) {
 	'use strict';
-	
+	console.log(err);
     $('#page-content').html('404 - This page does not yet exist!');
 };
