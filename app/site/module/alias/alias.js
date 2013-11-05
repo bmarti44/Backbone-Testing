@@ -3,6 +3,10 @@
 
 define(['jquery'], function($) {
 	'use strict';
-	//return an object to define the "my/shirt" module.
-	return 'my new module';
+	
+	// alias virtual paths to actual pages
+	return {
+		'something': 'about'
+	};
+	
 });

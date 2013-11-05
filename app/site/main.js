@@ -1,5 +1,5 @@
-/*global require*/
-'use strict';
+/*jslint devel: false, browser: true, maxerr: 50, indent: 4*/
+/*global define: false, require: false, $: false, jQuery: false, console: false, document: false, event: false, frames: false, history: false, Image: false, location: false, name: false, navigator: false, Option: false, parent: false, screen: false, setInterval: false, setTimeout: false, window: false, XMLHttpRequest: false */
 
 require.config({
     shim: {
@@ -23,14 +23,18 @@ require.config({
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: 'vendor/bootstrap',
-        config: 'config/main'
+        config: 'config/main',
+        alias: 'module/alias/alias'
     }
 });
 
 require([
     'backbone',
-    'config'
-], function (Backbone, config) {
+    'config',
+    'alias'
+], function (Backbone, config, alias) {
+	'use strict';
+	
 	var AppRouter = Backbone.Router.extend({
 	        routes: config.sections
 	    }),
@@ -42,6 +46,14 @@ require([
     });
     
     app_router.on('route:defaultRoute', function (actions) {
+		console.log(actions);
+		if (!actions) {
+			actions = 'index.html';
+		}
+		
+		if (typeof(alias[actions]) !== 'undefined') {
+			actions = alias[actions];
+		}
 		
 		if (actions.indexOf('.html') === -1 && actions.indexOf('.htm') === -1) {
 			require(['site/' + actions.replace('!', '') + '/index.js'], function(page) {
@@ -63,5 +75,7 @@ require([
 });
 
 require.onError = function (err) {
+	'use strict';
+	
     console.log(err);
 };

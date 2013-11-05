@@ -331,7 +331,23 @@ module.exports = function (grunt) {
                 'svgmin',
                 'htmlmin'
             ]
-        }
+        },
+        dust: {
+			build: {
+				files: [
+					{
+						expand: true,
+						src: ["**/*.dust"],
+						dest: "app/site/dust/",
+						ext: ".js"
+					}
+				],
+				options: {
+					relative: true,
+					basePath: 'app/sites'
+				}
+			}
+		}
     });
 
     grunt.registerTask('createDefaultTemplate', function () {
@@ -372,6 +388,7 @@ module.exports = function (grunt) {
         'modernizr',
         'copy:dist',
         'rev',
+        'dust:build',
         'usemin'
     ]);
 
