@@ -61,12 +61,12 @@ require([
 		if (actions.indexOf('.html') === -1 && actions.indexOf('.htm') === -1) {
 			require(['site/' + actions.replace('!', '') + '/index.js'], function(page) {
 				console.log(actions); 
-				console.log(page);
+				$('#page-content').html(page);
 			});
 		} else {
 			require([actions.replace('.html', '').replace('!', '').replace('.htm', '')], function(page) {
 				console.log(actions); 
-				console.log(page);
+				$('#page-content').html(page);
 			});	
 		}
         
@@ -80,5 +80,5 @@ require([
 require.onError = function (err) {
 	'use strict';
 	
-    console.log(err);
+    $('#page-content').html('404 - This page does not yet exist!');
 };

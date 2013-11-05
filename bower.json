@@ -6,11 +6,11 @@
     "jquery": "~2.0.3",
     "requirejs": "~2.1.9",
     "requirejs-text": "~2.0.10",
-    "underscore": "~1.5.2",
     "backbone": "~1.1.0",
     "modernizr": "~2.6.2",
     "dustjs-linkedin-amd": "*",
-    "dustjs-helpers-amd": "*"
+    "dustjs-helpers-amd": "*",
+    "underscore": "~1.5.2"
   },
   "devDependencies": {}
 }
