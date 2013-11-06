@@ -49,6 +49,7 @@ require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, ali
 			
 			dust.render(page.template, page.data, function(error, html) {
 				$('#page-content').html(html);
+				$(document).trigger('writeComplete');
 			});
 			
 		});
@@ -69,11 +70,14 @@ require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, ali
 			
 			require(['site/' + actions.replace('!', '') + '/index.js', 'dust', 'jquery'], function(page, dust, $) {
 				
-				dust.render(page.template, page.data, function(error, html) {
-					$('#page-content').html(html);
-				});
-				
-				$(document).trigger('writeComplete');
+				try {
+					dust.render(page.template, page.data, function(error, html) {
+						$('#page-content').html(html);
+						$(document).trigger('writeComplete');
+					});
+				} catch (exception) {
+					console.log(exception);
+				}
 				
 			});
 			
@@ -81,11 +85,14 @@ require(['backbone', 'config', 'alias', 'dust'], function (Backbone, config, ali
 			
 			require([actions.replace('.html', '').replace('!', '').replace('.htm', ''), 'dust', 'jquery'], function(page, dust, $) {
 				
-				dust.render(page.template, page.data, function(error, html) {
-					$('#page-content').html(html);
-				});
-				
-				$(document).trigger('writeComplete');
+				try {
+					dust.render(page.template, page.data, function(error, html) {
+						$('#page-content').html(html);
+						$(document).trigger('writeComplete');
+					});
+				} catch (exception) {
+					console.log(exception);
+				}
 				
 			});
 			

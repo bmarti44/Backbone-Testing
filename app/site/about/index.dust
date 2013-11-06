@@ -1,4 +1,4 @@
-{>"partial/global/header"  /}
+{>"partial/{header}"  /}
 
 <div class="jumbotron">
     <h1>'Allo, 'Allo!</h1>
@@ -13,4 +13,4 @@
     </div>
 </div>
 
-{>"partial/global/footer"  /}
+{>"partial/{footer}"  /}

@@ -6,7 +6,10 @@ define(['jquery', 'dust', 'template/partial/global/header', 'template/partial/gl
 	
 	return {
 		'template': template,
-		'data': {}
+		'data': {
+			'header': 'global/header',
+			'footer': 'global/footer'
+		}
 	};
 	
 });
